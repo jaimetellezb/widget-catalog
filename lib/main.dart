@@ -11,37 +11,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        colorScheme: const ColorScheme(
-          brightness: Brightness.dark,
-          primary: Color(0xFFb794f6),
-          onPrimary: Color.fromARGB(255, 162, 134, 176),
-          secondary: Color(0xFFc6f68d),
-          onSecondary: Color.fromARGB(255, 77, 40, 145),
-          error: Color(0xFFb794f6),
-          onError: Color(0xFFb794f6),
-          background: Color.fromARGB(255, 242, 241, 244),
-          onBackground: Color(0xFFb794f6),
-          surface: Color(0xFFb794f6),
-          onSurface: Color.fromARGB(255, 73, 71, 75),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.green,
         ),
-        // https://m3.material.io/styles/typography/type-scale-tokens
-        textTheme: TextTheme(
-            displayLarge: const TextStyle(),
-            displayMedium:
-                const TextStyle(color: Color.fromARGB(255, 77, 40, 145)),
-            displaySmall: const TextStyle(),
-            headlineLarge: const TextStyle(),
-            headlineMedium: const TextStyle(),
-            headlineSmall: const TextStyle(),
-            titleLarge: const TextStyle(),
-            titleMedium: const TextStyle(),
-            titleSmall: const TextStyle(),
-            labelLarge: const TextStyle(),
-            labelMedium: const TextStyle(),
-            labelSmall: const TextStyle(),
-            bodyLarge: TextStyle(color: Theme.of(context).primaryColor),
-            bodyMedium: TextStyle(color: Theme.of(context).primaryColor),
-            bodySmall: const TextStyle()),
       ),
       home: const MyHomePage(title: 'Flutter'),
     );
@@ -69,6 +41,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+    final currentSize = MediaQuery.maybeSizeOf(context);
+    print(currentSize);
+
+    final currentPadding = MediaQuery.maybePaddingOf(context);
+    print(currentPadding);
 
     return Scaffold(
       appBar: AppBar(
@@ -89,6 +67,40 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: textTheme.headlineMedium,
+            ),
+            Card(
+              color: colorScheme.primaryContainer,
+              child: const Text('Sin Padding'),
+            ),
+            Card(
+              color: colorScheme.primaryContainer,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(
+                  'Con Padding all',
+                  style: textTheme.labelLarge,
+                ),
+              ),
+            ),
+            Card(
+              color: colorScheme.primaryContainer,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text(
+                  'Con Padding symmetric vertical',
+                  style: textTheme.labelLarge,
+                ),
+              ),
+            ),
+            Card(
+              color: colorScheme.primaryContainer,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20.0, left: 10.0),
+                child: Text(
+                  'Con Padding only bottom left',
+                  style: textTheme.labelLarge,
+                ),
+              ),
             ),
           ],
         ),
