@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -12,7 +13,7 @@ class SettingScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pop(context);
+            context.go('/');
           },
           child: const Text('volver a Home Screen'),
         ),
