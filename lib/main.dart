@@ -43,10 +43,7 @@ class MyHomePage extends StatelessWidget {
               'DefaultTextStyle',
             ),
             DefaultTextStyle.merge(
-              style: const TextStyle(
-                  fontSize: 30,
-                  fontFamily: 'Italic',
-                  fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               child: const Text(
                 'DefaultTextStyle.merge',
               ),
