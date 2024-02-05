@@ -27,25 +27,43 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DefaultTextStyle defaultStyle = DefaultTextStyle.of(context);
-    print(defaultStyle);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(title),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'DefaultTextStyle',
+            Text(
+              'Hola Mundo, dentro de una línea!!',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            DefaultTextStyle.merge(
-              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              child: const Text(
-                'DefaultTextStyle.merge',
+            Text.rich(
+              TextSpan(
+                text: 'Hola Mundo,',
+                children: <TextSpan>[
+                  TextSpan(
+                      text: ' dentro de ',
+                      style: TextStyle(fontStyle: FontStyle.italic)),
+                  TextSpan(
+                      text: 'una línea!!',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+            SelectionArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('Texto seleccionable'),
+                  SelectionContainer.disabled(
+                    child: Text('Texto no seleccionable'),
+                  ),
+                  Text('Texto seleccionable 2'),
+                ],
               ),
             ),
           ],
