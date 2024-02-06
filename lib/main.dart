@@ -39,31 +39,28 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const Image(
-              height: 200,
-              width: 300,
-              image: AssetImage('assets/images/dash-fainting.gif'),
-            ),
             Image.asset(
               'assets/images/dashatars.png',
               height: 200,
               width: 300,
             ),
-            Image.network(
-              url,
-              height: 200,
-              width: 300,
+            const Icon(
+              Icons.warning,
+              color: Colors.yellow,
+              size: 40.0,
+              shadows: [Shadow(blurRadius: 20, offset: Offset(10, 10))],
             ),
-            const SizedBox(
-              height: 20,
+            const Icon(
+              Icons.info,
+              color: Colors.blue,
+              size: 35.0,
             ),
-            Image.network(
-              errorBuilder: (context, error, stackTrace) => Text(
-                '$error',
-                style: const TextStyle(color: Colors.red),
-              ),
-              formatInvalid,
+            const Icon(
+              Icons.cancel,
+              color: Colors.red,
+              size: 35.0,
             ),
           ],
         ),
