@@ -4,6 +4,8 @@ void main() {
   runApp(const MyApp());
 }
 
+final list = List.generate(10, (index) => index);
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -15,55 +17,83 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const Center(child: ListViewWidget()),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class ListViewWidget extends StatelessWidget {
+  const ListViewWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      body: SafeArea(
+        child: ListView(
+          key: GlobalKey(), // identificador del widget
+          scrollDirection: Axis.vertical, //
+          reverse: true,
+          // controller: , // se puede utilizar para controlar la posición de desplazamiento del ListView.
+
+          shrinkWrap: true,
+
+          padding: const EdgeInsets.all(8.0),
+          // itemExtent: 100, // sobreescribe las dimensiones de los widgets hijos
+          // itemExtentBuilder: (index, dimensions) => 70, // sobreescribe las dimensiones de los widgets hijos
+          // prototypeItem: ,
+          // clipBehavior: ,
+
+          children: [
+            Container(
+              // height: 50,
+              color: Colors.amber,
+              child: const Center(child: Text('A')),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Container(
+              height: 50,
+              color: Colors.orange,
+              child: const Text('A'),
+            ),
+            Container(
+              height: 50,
+              color: Colors.amber,
+              child: const Text('A'),
+            ),
+            Container(
+              height: 50,
+              color: Colors.orange,
+              child: const Text('A'),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
     );
+  }
+}
+
+class ListViewBuilderWidget extends StatelessWidget {
+  const ListViewBuilderWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView();
+  }
+}
+
+class ListViewCustomWidget extends StatelessWidget {
+  const ListViewCustomWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView();
+  }
+}
+
+class ListViewSeparatedWidget extends StatelessWidget {
+  const ListViewSeparatedWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView();
   }
 }
