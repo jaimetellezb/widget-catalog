@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter ClipOval'),
     );
   }
 }
@@ -30,14 +30,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,25 +37,99 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: ClipOval(
+                  clipBehavior: Clip.hardEdge,
+                  clipper: ClipperWidget2(),
+                  child: Container(
+                    height: 200,
+                    width: 200,
+                    color: Colors.green,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ClipOval(
+                  clipBehavior: Clip.hardEdge,
+                  clipper: ClipperWidget(),
+                  child: Container(
+                    height: 200,
+                    width: 200,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ClipOval(
+                  clipBehavior: Clip.hardEdge,
+                  clipper: ClipperWidget(),
+                  child: Container(
+                    height: 200,
+                    width: 200,
+                    color: Colors.purple,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ClipOval(
+                  clipBehavior: Clip.hardEdge,
+                  clipper: ClipperWidget2(),
+                  child: Container(
+                    height: 200,
+                    width: 200,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ClipOval(
+                child: Image.network(
+                  'https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                  height: 200,
+                  width: 200,
+                  alignment: Alignment.topCenter,
+                ),
+              )
+            ],
+          )
+        ],
       ),
     );
+  }
+}
+
+class ClipperWidget extends CustomClipper<Rect> {
+  @override
+  Rect getClip(Size size) {
+    return const Rect.fromLTWH(0, 50, 100, 150);
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Rect> oldClipper) {
+    return false;
+  }
+}
+
+class ClipperWidget2 extends CustomClipper<Rect> {
+  @override
+  Rect getClip(Size size) {
+    return const Rect.fromLTWH(0, 50, 100, 100);
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Rect> oldClipper) {
+    return false;
   }
 }
