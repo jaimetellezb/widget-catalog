@@ -4,7 +4,7 @@ void main() {
   runApp(const MyApp());
 }
 
-final list = List.generate(10, (index) => index);
+final list = List.generate(30, (index) => index);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Center(child: ListViewWidget()),
+      home: const Center(child: ListViewBuilderWidget()),
     );
   }
 }
@@ -28,44 +28,37 @@ class ListViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          key: GlobalKey(), // identificador del widget
-          scrollDirection: Axis.vertical, //
-          reverse: true,
-          // controller: , // se puede utilizar para controlar la posición de desplazamiento del ListView.
-
-          shrinkWrap: true,
-
-          padding: const EdgeInsets.all(8.0),
-          // itemExtent: 100, // sobreescribe las dimensiones de los widgets hijos
-          // itemExtentBuilder: (index, dimensions) => 70, // sobreescribe las dimensiones de los widgets hijos
-          // prototypeItem: ,
-          // clipBehavior: ,
-
-          children: [
-            Container(
-              // height: 50,
-              color: Colors.amber,
-              child: const Center(child: Text('A')),
-            ),
-            Container(
-              height: 50,
-              color: Colors.orange,
-              child: const Text('A'),
-            ),
-            Container(
-              height: 50,
-              color: Colors.amber,
-              child: const Text('A'),
-            ),
-            Container(
-              height: 50,
-              color: Colors.orange,
-              child: const Text('A'),
-            ),
-          ],
-        ),
+      body: ListView(
+        key: GlobalKey(),
+        scrollDirection: Axis.vertical, // por defecto es vertical
+        padding: const EdgeInsets.all(8.0),
+        children: [
+          // agregamos este espacio para que los widget empiecen abajo
+          // del área de configuraciones del dispositivo
+          const SizedBox(
+            height: 50,
+          ),
+          Container(
+            height: 80,
+            color: Colors.green[500],
+            child: const Center(child: Text('Widget A')),
+          ),
+          Container(
+            height: 70,
+            color: Colors.green[400],
+            child: const Center(child: Text('Widget B')),
+          ),
+          Container(
+            height: 60,
+            color: Colors.green[300],
+            child: const Center(child: Text('Widget C')),
+          ),
+          Container(
+            height: 50,
+            color: Colors.green[200],
+            child: const Center(child: Text('Widget D')),
+          ),
+        ],
       ),
     );
   }
@@ -76,7 +69,21 @@ class ListViewBuilderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView();
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          return Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: Colors.blue[300],
+                border: Border.all(width: 0.5),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text('Widget ${index + 1} '));
+        },
+      ),
+    );
   }
 }
 
@@ -85,7 +92,16 @@ class ListViewCustomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView();
+    return Scaffold(
+      body: ListView.custom(childrenDelegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return Container(
+            color: Colors.grey,
+            child: const Text('Widget'),
+          );
+        },
+      )),
+    );
   }
 }
 
@@ -94,6 +110,18 @@ class ListViewSeparatedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView();
+    return Scaffold(
+      body: ListView.separated(
+          itemBuilder: (context, index) {
+            return Container(
+              color: Colors.yellow,
+              child: Text('Widget $index'),
+            );
+          },
+          separatorBuilder: (context, index) => const Divider(
+                color: Colors.purple,
+              ),
+          itemCount: list.length),
+    );
   }
 }
